@@ -1,7 +1,12 @@
 import "./App.css";
 
 function App() {
-  return <>CS Quiz</>;
+  return (
+    <>
+      <h1>CS Quiz</h1>
+      <div />
+    </>
+  );
 }
 
 export default App;
