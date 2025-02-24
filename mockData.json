@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "HTML에서 제목을 나타내는 태그는?",
+    "options": ["<head>", "<title>", "<h1>", "<p>"],
+    "answer": "<h1>"
+  },
+  {
+    "id": 2,
+    "question": "CSS에서 요소의 가로 중앙 정렬을 위해 사용되는 속성은?",
+    "options": ["text-align", "margin", "align-items", "justify-content"],
+    "answer": "margin"
+  },
+  {
+    "id": 3,
+    "question": "JavaScript에서 변수를 선언하는 키워드는?",
+    "options": ["var", "let", "const", "모두 가능"],
+    "answer": "모두 가능"
+  },
+  {
+    "id": 4,
+    "question": "React에서 상태를 관리하는 기본적인 Hook은?",
+    "options": ["useEffect", "useState", "useReducer", "useContext"],
+    "answer": "useState"
+  },
+  {
+    "id": 5,
+    "question": "JavaScript에서 화살표 함수의 올바른 선언 방법은?",
+    "options": ["function() => {}", "() => {}", "=> {}", "function => {}"],
+    "answer": "() => {}"
+  },
+  {
+    "id": 6,
+    "question": "CSS에서 배경 이미지를 반복하지 않게 하는 속성 값은?",
+    "options": ["repeat", "no-repeat", "cover", "contain"],
+    "answer": "no-repeat"
+  },
+  {
+    "id": 7,
+    "question": "React에서 컴포넌트가 처음 렌더링될 때 실행되는 Hook은?",
+    "options": ["useState", "useEffect", "useRef", "useMemo"],
+    "answer": "useEffect"
+  },
+  {
+    "id": 8,
+    "question": "JavaScript에서 '===' 연산자의 역할은?",
+    "options": ["값만 비교", "타입만 비교", "값과 타입 비교", "주소 비교"],
+    "answer": "값과 타입 비교"
+  },
+  {
+    "id": 9,
+    "question": "CSS에서 flexbox의 주축을 변경하는 속성은?",
+    "options": ["align-items", "justify-content", "flex-direction", "order"],
+    "answer": "flex-direction"
+  },
+  {
+    "id": 10,
+    "question": "HTML에서 내부 스타일을 적용하는 태그는?",
+    "options": ["<link>", "<style>", "<script>", "<css>"],
+    "answer": "<style>"
+  }
+]
