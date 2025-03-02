@@ -25,6 +25,9 @@ const Home = () => {
       return true;
     } catch (e) {
       // 닉네임 중복 처리
+      if (e.response.status === 400) {
+        alert(e.response.message);
+      }
       console.error(e);
       return null;
     }
