@@ -3,54 +3,65 @@ import style from "./quizBox.module.css";
 import Option from "../Option/option";
 import ProgressBar from "../ProgressBar/progressBar";
 import { useNavigate } from "react-router-dom";
-import mockData from "../../../mockData.json";
+import axios from "axios";
 
 const QuizBox = () => {
-  const [questions, setQuestions] = useState([]); //질문 리스트
-  const [curQNum, setCurQNum] = useState(0); //현재 질문 번호
+  const [question, setQuestion] = useState({}); //질문 리스트
   const [selectedOption, setSelectedOption] = useState(undefined); //선택한 옵션
   const [resetTime, setResetTime] = useState(0); // 타이머 리셋용 키
-  const [score, setScore] = useState(0); //누적 점수
   const [answerMode, setAnswerMode] = useState(false);
   const navigate = useNavigate();
 
+  const gameId = localStorage.getItem("gameId");
+
   useEffect(() => {
-    setQuestions(mockData);
+    requestQuestion();
   }, []);
-
-  useEffect(() => {
-    console.log(questions);
-  }, [questions]);
-
-  // if (questions.length === 0) return <p>Loading...</p>;
-
-  const nextQuestion = () => {
-    if (curQNum < questions.length - 1) {
-      setCurQNum(curQNum + 1); //다음 문제로 이동
-      setSelectedOption(undefined); //선택한 보기 초기화
-      setAnswerMode(false); //문제 풀기 모드로 되돌아감
-      setResetTime((prev) => prev + 1); // 타이머 리셋
-    } else {
-      //마지막 문제일 경우 score 확인하러 이동
-      navigate("/score");
-    }
-  };
 
   const clickOption = (option) => {
     if (!answerMode) {
       //문제 풀기 모드라면 사용자가 선택한 보기를 값으로 선택
       setSelectedOption(option);
       setAnswerMode(true); // 사용자가 옵션을 클릭하면 답 출력 모드로 변경
-      if (option === questions[curQNum].answer) {
-        setScore((prevScore) => prevScore + 1);
-      }
+      requestAnswer();
     }
   };
 
   const timeUp = () => {
     if (!answerMode) {
       setAnswerMode(true);
-      setSelectedOption(null); // 사용자가 선택하지 않은 경우를 나타내기 위해 null로 설정
+      setSelectedOption(undefined); //사용자가 선택하지 않은 경우를 나타내기 위해 null로 설정
+    }
+  };
+
+  //서버에서 채점하기 위한 요청
+  const requestAnswer = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/api/game/${gameId}/answer`,
+        { questionId: question.id, answer: selectedOption }
+      );
+      console.log(response);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const requestQuestion = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/game/${gameId}/next`
+      );
+      if (response !== null) {
+        setQuestion(response);
+        setSelectedOption(undefined);
+        setAnswerMode(false);
+        setResetTime((prev) => prev + 1);
+      } else {
+        navigate("/score");
+      }
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -66,18 +77,16 @@ const QuizBox = () => {
       </div>
       <div className={style.content}>
         <div className={style.title}>
-          <p className={style.question}>{questions[curQNum]?.question}</p>
-          <span className={style.questionCount}>
-            {curQNum + 1} / {questions?.length}
-          </span>
+          <p className={style.question}>{question?.question}</p>
+          <span className={style.questionCount}>{question?.id} / 10</span>
         </div>
         <div className={style.options}>
-          {questions[curQNum]?.options.map((option, index) => (
+          {question?.optionText.map((option, index) => (
             <Option
               key={index}
               text={option}
               onClick={() => clickOption(option)}
-              isCorrect={option === questions[curQNum]?.answer}
+              isCorrect={option === question?.answer}
               index={index}
               answerMode={answerMode}
             />
@@ -85,7 +94,7 @@ const QuizBox = () => {
         </div>
       </div>
       {answerMode && (
-        <button className={style.nextButton} onClick={nextQuestion}>
+        <button className={style.nextButton} onClick={requestQuestion}>
           next
         </button>
       )}
