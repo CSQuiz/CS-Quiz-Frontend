@@ -1,5 +1,7 @@
 import { useState } from "react";
 import style from "./home.module.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [nickName, setNickName] = useState("");
@@ -7,12 +9,36 @@ const Home = () => {
 
   const difficultyList = ["Easy", "Normal", "Hard", "Random"];
 
+  const navigate = useNavigate();
+
+  const requestGameStart = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/game/start",
+        {
+          nickname: nickName,
+          difficulty: difficulty,
+        }
+      );
+      localStorage.setItem("gameId", response.gameId);
+      console.log(response.gameId);
+      return true;
+    } catch (e) {
+      // 닉네임 중복 처리
+      console.error(e);
+      return null;
+    }
+  };
+
   const gameStart = (event) => {
     event.preventDefault();
     if (nickName.trim() && difficulty) {
-      alert("게임 시작");
+      const result = requestGameStart();
+      if (result !== null) {
+        navigate("/quiz");
+      }
     } else {
-      alert("모든 필드 선택");
+      alert("닉네임과 난이도를 설정해주세요.");
     }
   };
 
