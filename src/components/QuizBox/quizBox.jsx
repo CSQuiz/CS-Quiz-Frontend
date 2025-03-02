@@ -52,7 +52,7 @@ const QuizBox = () => {
       const response = await axios.get(
         `http://localhost:8080/api/game/${gameId}/next`
       );
-      if (response !== null) {
+      if (!response.lastQuestion) {
         setQuestion(response);
         setSelectedOption(undefined);
         setAnswerMode(false);
