@@ -19,6 +19,7 @@ const Score = () => {
         `http://localhost:8080/api/game/${gameId}/end`,
         { gameId: gameId }
       );
+      console.log("사용자 스코어", response.data);
       setScore(response.data.finalScore);
       setNickName(response.data.nickname);
     } catch (e) {
@@ -31,7 +32,7 @@ const Score = () => {
       <div className={style.title}>{nickName}의 점수는</div>
       <div className={style.content}>
         <span className={style.score}>{score} 점</span>
-        <button className={style.button} onClick={() => navigate("/lank")}>
+        <button className={style.button} onClick={() => navigate("/rank")}>
           전체 순위 보러가기
         </button>
       </div>
