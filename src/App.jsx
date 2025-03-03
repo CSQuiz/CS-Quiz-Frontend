@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home/home";
 import QuizBox from "./components/QuizBox/quizBox";
 import Score from "./components/Score/score";
-import Lank from "./components/Lank/lank";
+import Rank from "./components/Rank/rank";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/quiz" element={<QuizBox />} />
           <Route path="/score" element={<Score />} />
-          <Route path="/lank" element={<Lank />} />
+          <Route path="/rank" element={<Rank />} />
         </Routes>
       </Router>
     </>

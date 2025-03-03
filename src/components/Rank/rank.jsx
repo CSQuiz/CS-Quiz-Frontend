@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import User from "../User/user";
-import style from "./lank.module.css";
+import style from "./rank.module.css";
 import axios from "axios";
 
-const Lank = () => {
+const Rank = () => {
   const [rank, setRank] = useState([]);
 
   useEffect(() => {
@@ -25,11 +25,11 @@ const Lank = () => {
     <div className={style.container}>
       <div className={style.title}>순위</div>
       <div className={style.contents}>
-        {rank.map((user, index) => {
-          <User key={index} user={user} lank={index} />;
-        })}
+        {rank.map((user, index) => (
+          <User key={index} user={user} lank={index} />
+        ))}
       </div>
     </div>
   );
 };
-export default Lank;
+export default Rank;
