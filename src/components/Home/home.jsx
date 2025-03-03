@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const [nickName, setNickName] = useState("");
   const [difficulty, setDifficulty] = useState(null);
+  const [gameQuestionList, setGameQuestionList] = useState([]);
 
   const difficultyList = ["Easy", "Normal", "Hard", "Random"];
 
@@ -20,26 +21,27 @@ const Home = () => {
           difficulty: difficulty,
         }
       );
-      // console.log(`으응답: ${response}`);
+      console.log(response.data);
       localStorage.setItem("gameId", response.data.gameId);
-      console.log(response.data.gameId);
-      return true;
+      setGameQuestionList(response.data.gameQuestionList);
+
+      return response.data.gameQuestionList;
     } catch (e) {
       // 닉네임 중복 처리
       if (e.response.status === 400) {
-        alert(e.response.message);
+        alert("이미 사용중인 닉네임 입니다.");
       }
       console.error(e);
       return null;
     }
   };
 
-  const gameStart = (event) => {
+  const gameStart = async (event) => {
     event.preventDefault();
     if (nickName.trim() && difficulty) {
-      const result = requestGameStart();
-      if (result !== null) {
-        navigate("/quiz");
+      const gameQuestions = await requestGameStart(); // API 응답을 기다린 후 데이터 저장
+      if (gameQuestions) {
+        navigate("/quiz", { state: gameQuestions });
       }
     } else {
       alert("닉네임과 난이도를 설정해주세요.");
