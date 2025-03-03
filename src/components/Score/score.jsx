@@ -19,8 +19,8 @@ const Score = () => {
         `http://localhost:8080/api/game/${gameId}/end`,
         { gameId: gameId }
       );
-      setScore(response.finalScore);
-      setNickName(response.nickname);
+      setScore(response.data.finalScore);
+      setNickName(response.data.nickname);
     } catch (e) {
       console.error(e);
     }

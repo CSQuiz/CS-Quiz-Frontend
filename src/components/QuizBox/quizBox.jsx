@@ -18,6 +18,10 @@ const QuizBox = () => {
     requestQuestion();
   }, []);
 
+  useEffect(() => {
+    console.log(`question: ${question}`);
+  }, [question]);
+
   const clickOption = (option) => {
     if (!answerMode) {
       //문제 풀기 모드라면 사용자가 선택한 보기를 값으로 선택
@@ -41,7 +45,7 @@ const QuizBox = () => {
         `http://localhost:8080/api/game/${gameId}/answer`,
         { questionId: question.id, answer: selectedOption }
       );
-      console.log(response);
+      console.log(response.data);
     } catch (e) {
       console.error(e);
     }
@@ -52,8 +56,9 @@ const QuizBox = () => {
       const response = await axios.get(
         `http://localhost:8080/api/game/${gameId}/next`
       );
-      if (!response.lastQuestion) {
-        setQuestion(response);
+      console.log(`응답: ${response.data}`);
+      if (!response.data.lastQuestion) {
+        setQuestion(response.data);
         setSelectedOption(undefined);
         setAnswerMode(false);
         setResetTime((prev) => prev + 1);
@@ -61,7 +66,7 @@ const QuizBox = () => {
         navigate("/score");
       }
     } catch (e) {
-      console.error(e);
+      console.error(`에러: ${e}`);
     }
   };
 
@@ -81,7 +86,7 @@ const QuizBox = () => {
           <span className={style.questionCount}>{question?.id} / 10</span>
         </div>
         <div className={style.options}>
-          {question?.optionText.map((option, index) => (
+          {question?.optionText?.map((option, index) => (
             <Option
               key={index}
               text={option}

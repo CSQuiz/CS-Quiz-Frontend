@@ -20,8 +20,9 @@ const Home = () => {
           difficulty: difficulty,
         }
       );
-      localStorage.setItem("gameId", response.gameId);
-      console.log(response.gameId);
+      // console.log(`으응답: ${response}`);
+      localStorage.setItem("gameId", response.data.gameId);
+      console.log(response.data.gameId);
       return true;
     } catch (e) {
       // 닉네임 중복 처리
