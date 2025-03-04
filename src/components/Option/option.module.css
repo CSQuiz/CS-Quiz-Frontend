@@ -1,0 +1,43 @@
+.outline {
+  border: 2px solid #cecece;
+  border-radius: 52px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 2rem;
+  width: 100%;
+  cursor: pointer;
+}
+
+.outline.correct {
+  background-color: #00d535;
+  color: white;
+  border: 2px solid #00d535;
+  font-size: 22px;
+}
+
+.optionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button:disabled .wrongIcon {
+  color: rgb(232, 63, 63);
+  font-size: 22px;
+}
+
+.optionText {
+  font-size: 16px;
+}
