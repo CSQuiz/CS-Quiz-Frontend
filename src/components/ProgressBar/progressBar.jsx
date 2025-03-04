@@ -16,8 +16,7 @@ const ProgressBar = ({ duration, onTimeUp, resetTime, answerMode }) => {
       setTimeLeft((prevTime) => {
         if (prevTime <= 0.1) {
           clearInterval(timer);
-          // onTimeUp(); // 시간이 다 되면 다음 문제로 이동
-          setTimeout(() => onTimeUp(), 0);
+          setTimeout(() => onTimeUp(), 0); // 시간이 다 되면 다음 문제로 이동
           return 0;
         }
         return prevTime - 0.1;
