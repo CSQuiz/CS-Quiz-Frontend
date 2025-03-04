@@ -21,7 +21,7 @@ const QuizBox = () => {
   useEffect(() => {
     if (gameQuestions.length > 0) {
       setQuestions(gameQuestions);
-      console.log(`질문: ${questions}`);
+      // console.log(`질문: ${questions}`);
     }
   }, []);
 
@@ -31,7 +31,7 @@ const QuizBox = () => {
       // setSelectedOption(undefined); // 선택한 보기 초기화
       setAnswerMode(false); // 문제 풀기 모드로 되돌아감
       setResetTime((prev) => prev + 1); // 타이머 리셋
-      console.log("현재 문제", questions[curQNum]);
+      // console.log("현재 문제", questions[curQNum]);
     } else {
       navigate("/score"); // 마지막 문제일 경우 결과 페이지 이동
     }
@@ -55,12 +55,12 @@ const QuizBox = () => {
   // 서버에서 채점하기 위한 요청
   const requestAnswer = async (option) => {
     try {
-      console.log("사용자가 선택한 정답", option);
+      // console.log("사용자가 선택한 정답", option);
       const response = await axios.post(
         `http://localhost:8080/api/game/${gameId}/answer`,
         { questionId: questions[curQNum]?.id, answer: option }
       );
-      console.log("정답 여부", response.data);
+      // console.log("정답 여부", response.data);
     } catch (e) {
       console.error(e);
     }
