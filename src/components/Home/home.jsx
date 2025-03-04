@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const [nickName, setNickName] = useState("");
   const [difficulty, setDifficulty] = useState(null);
-  const [gameQuestionList, setGameQuestionList] = useState([]);
+  // const [gameQuestionList, setGameQuestionList] = useState([]);
 
   const difficultyList = ["Easy", "Normal", "Hard", "Random"];
 
@@ -23,8 +23,7 @@ const Home = () => {
       );
       console.log(response.data);
       localStorage.setItem("gameId", response.data.gameId);
-      setGameQuestionList(response.data.gameQuestionList);
-
+      // setGameQuestionList(response.data.gameQuestionList);
       return response.data.gameQuestionList;
     } catch (e) {
       // 닉네임 중복 처리
