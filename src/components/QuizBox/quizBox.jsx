@@ -5,6 +5,8 @@ import ProgressBar from "../ProgressBar/progressBar";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const SERVER = import.meta.env.VITE_SERVER;
+
 const QuizBox = () => {
   const [questions, setQuestions] = useState([]); // 질문 리스트
   const [curQNum, setCurQNum] = useState(0); // 현재 질문 번호
@@ -33,7 +35,7 @@ const QuizBox = () => {
       setResetTime((prev) => prev + 1); // 타이머 리셋
       // console.log("현재 문제", questions[curQNum]);
     } else {
-      navigate("/score"); // 마지막 문제일 경우 결과 페이지 이동
+      navigate("/score", { replace: true }); // 마지막 문제일 경우 결과 페이지 이동
     }
   };
 
@@ -56,11 +58,11 @@ const QuizBox = () => {
   const requestAnswer = async (option) => {
     try {
       // console.log("사용자가 선택한 정답", option);
-      const response = await axios.post(
-        `http://localhost:8080/api/game/${gameId}/answer`,
-        { questionId: questions[curQNum]?.id, answer: option }
-      );
-      // console.log("정답 여부", response.data);
+      const response = await axios.post(`${SERVER}/api/game/${gameId}/answer`, {
+        questionId: questions[curQNum]?.id,
+        answer: option,
+      });
+      console.log("정답 여부: ", response.data);
     } catch (e) {
       console.error(e);
     }
@@ -70,7 +72,7 @@ const QuizBox = () => {
     <div className={style.container}>
       <div className={style.timeBar}>
         <ProgressBar
-          duration={5}
+          duration={15}
           onTimeUp={timeUp}
           resetTime={resetTime}
           answerMode={answerMode}
