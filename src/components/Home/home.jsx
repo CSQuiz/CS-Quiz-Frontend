@@ -3,27 +3,23 @@ import style from "./home.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const SERVER = import.meta.env.VITE_SERVER;
+
 const Home = () => {
   const [nickName, setNickName] = useState("");
   const [difficulty, setDifficulty] = useState(null);
-  // const [gameQuestionList, setGameQuestionList] = useState([]);
+  const navigate = useNavigate();
 
   const difficultyList = ["Easy", "Normal", "Hard", "Random"];
 
-  const navigate = useNavigate();
-
   const requestGameStart = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/game/start",
-        {
-          nickname: nickName,
-          difficulty: difficulty,
-        }
-      );
+      const response = await axios.post(`${SERVER}/api/game/start`, {
+        nickname: nickName,
+        difficulty: difficulty,
+      });
       console.log(response.data);
       localStorage.setItem("gameId", response.data.gameId);
-      // setGameQuestionList(response.data.gameQuestionList);
       return response.data.gameQuestionList;
     } catch (e) {
       // 닉네임 중복 처리
