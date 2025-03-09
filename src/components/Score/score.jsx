@@ -3,6 +3,8 @@ import style from "./score.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const SERVER = import.meta.env.VITE_SERVER;
+
 const Score = () => {
   const [score, setScore] = useState(0);
   const [nickName, setNickName] = useState("");
@@ -15,10 +17,9 @@ const Score = () => {
   const gameId = localStorage.getItem("gameId");
   const requestScore = async () => {
     try {
-      const response = await axios.post(
-        `http://localhost:8080/api/game/${gameId}/end`,
-        { gameId: gameId }
-      );
+      const response = await axios.post(`${SERVER}/api/game/${gameId}/end`, {
+        gameId: gameId,
+      });
       // console.log("사용자 스코어", response.data);
       setScore(response.data.finalScore);
       setNickName(response.data.nickname);

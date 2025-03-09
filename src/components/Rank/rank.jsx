@@ -3,6 +3,8 @@ import User from "../User/user";
 import style from "./rank.module.css";
 import axios from "axios";
 
+const SERVER = import.meta.env.VITE_SERVER;
+
 const Rank = () => {
   const [rank, setRank] = useState([]);
 
@@ -12,9 +14,7 @@ const Rank = () => {
 
   const requestRanking = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:8080/api/users/ranking"
-      );
+      const response = await axios.get(`{SERVER}/api/users/ranking`);
       setRank(response.data);
     } catch (e) {
       console.error(e);
