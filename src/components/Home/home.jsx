@@ -18,7 +18,6 @@ const Home = () => {
         nickname: nickName,
         difficulty: difficulty,
       });
-      console.log(response.data);
       localStorage.setItem("gameId", response.data.gameId);
       return response.data.gameQuestionList;
     } catch (e) {
