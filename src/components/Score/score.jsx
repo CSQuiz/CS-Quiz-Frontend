@@ -20,7 +20,7 @@ const Score = () => {
       const response = await axios.post(`${SERVER}/api/game/${gameId}/end`, {
         gameId: gameId,
       });
-      // console.log("사용자 스코어", response.data);
+      console.log("사용자 스코어", response.data);
       setScore(response.data.finalScore);
       setNickName(response.data.nickname);
     } catch (e) {

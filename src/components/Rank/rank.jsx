@@ -14,7 +14,8 @@ const Rank = () => {
 
   const requestRanking = async () => {
     try {
-      const response = await axios.get(`{SERVER}/api/users/ranking`);
+      const response = await axios.get(`${SERVER}/api/users/ranking`);
+
       setRank(response.data);
     } catch (e) {
       console.error(e);
