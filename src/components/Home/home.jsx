@@ -2,10 +2,11 @@ import { useState } from "react";
 import style from "./home.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import CustomModal from "../CustomModal/customModal";
 
 const SERVER = import.meta.env.VITE_SERVER;
 
-const Home = () => {
+const Home = ({ setModalOpen, setModalText }) => {
   const [nickName, setNickName] = useState("");
   const [difficulty, setDifficulty] = useState(null);
   const navigate = useNavigate();
@@ -23,7 +24,9 @@ const Home = () => {
     } catch (e) {
       // 닉네임 중복 처리
       if (e.response.status === 400) {
-        alert("이미 사용중인 닉네임입니다.");
+        setModalOpen(true);
+        setModalText("이미 사용중인 닉네임입니다.");
+        // alert("이미 사용중인 닉네임입니다.");
       }
       console.error(e);
       return null;
@@ -38,7 +41,9 @@ const Home = () => {
         navigate("/quiz", { state: gameQuestions });
       }
     } else {
-      alert("닉네임과 난이도를 설정해주세요.");
+      setModalOpen(true);
+      setModalText("닉네임과 난이도를 모두 설정해주세요.");
+      // alert("닉네임과 난이도를 설정해주세요.");
     }
   };
 
