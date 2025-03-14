@@ -23,7 +23,7 @@ const Home = () => {
     } catch (e) {
       // 닉네임 중복 처리
       if (e.response.status === 400) {
-        alert("이미 사용중인 닉네임 입니다.");
+        alert("이미 사용중인 닉네임입니다.");
       }
       console.error(e);
       return null;
