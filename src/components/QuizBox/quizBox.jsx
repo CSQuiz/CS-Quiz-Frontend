@@ -10,7 +10,6 @@ const SERVER = import.meta.env.VITE_SERVER;
 const QuizBox = () => {
   const [questions, setQuestions] = useState([]); // 질문 리스트
   const [curQNum, setCurQNum] = useState(0); // 현재 질문 번호
-  // const [selectedOption, setSelectedOption] = useState(undefined); // 선택한 옵션
   const [resetTime, setResetTime] = useState(0); // 타이머 리셋용 키
   const [answerMode, setAnswerMode] = useState(false);
   const navigate = useNavigate();
@@ -23,17 +22,14 @@ const QuizBox = () => {
   useEffect(() => {
     if (gameQuestions.length > 0) {
       setQuestions(gameQuestions);
-      // console.log(`질문: ${questions}`);
     }
   }, []);
 
   const nextQuestion = () => {
     if (curQNum < questions.length - 1) {
       setCurQNum(curQNum + 1); // 다음 문제로 이동
-      // setSelectedOption(undefined); // 선택한 보기 초기화
       setAnswerMode(false); // 문제 풀기 모드로 되돌아감
       setResetTime((prev) => prev + 1); // 타이머 리셋
-      // console.log("현재 문제", questions[curQNum]);
     } else {
       navigate("/score", { replace: true }); // 마지막 문제일 경우 결과 페이지 이동
     }
@@ -41,7 +37,6 @@ const QuizBox = () => {
 
   const clickOption = (option) => {
     if (!answerMode) {
-      // setSelectedOption(option);
       setAnswerMode(true); // 사용자가 옵션을 클릭하면 답 출력 모드로 변경
       requestAnswer(option);
     }
@@ -50,14 +45,12 @@ const QuizBox = () => {
   const timeUp = () => {
     if (!answerMode) {
       setAnswerMode(true);
-      // setSelectedOption(undefined); // 사용자가 선택하지 않은 경우를 나타내기 위해 null로 설정
     }
   };
 
   // 서버에서 채점하기 위한 요청
   const requestAnswer = async (option) => {
     try {
-      // console.log("사용자가 선택한 정답", option);
       const response = await axios.post(`${SERVER}/api/game/${gameId}/answer`, {
         questionId: questions[curQNum]?.id,
         answer: option,
