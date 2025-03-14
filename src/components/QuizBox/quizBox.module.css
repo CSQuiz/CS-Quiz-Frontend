@@ -20,15 +20,19 @@
   padding: 1.8rem 3rem;
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 }
 
 .question {
   color: white;
   margin: 0;
+  word-break: break-word;
 }
 
 .questionCount {
   color: white;
+  white-space: nowrap;
+  color: #f9ab00;
 }
 
 .options {

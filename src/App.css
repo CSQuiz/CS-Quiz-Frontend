@@ -16,12 +16,21 @@
       format("woff");
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
 h1 {
   font-family: "godoRoundedR";
   font-size: 60px;
   margin: 0;
   margin-bottom: 32px;
   padding: 0;
+  z-index: 1;
+  position: relative;
 }
 
 * {
