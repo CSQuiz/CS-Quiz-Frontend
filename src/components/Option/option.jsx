@@ -2,12 +2,19 @@ import style from "./option.module.css";
 import { FaCircleCheck } from "react-icons/fa6";
 import { FaRegCircleXmark } from "react-icons/fa6";
 
-const Option = ({ text, onClick, isCorrect = false, index, answerMode }) => {
+const Option = ({
+  text,
+  onClick,
+  isClicked,
+  isCorrect = false,
+  index,
+  answerMode,
+}) => {
   const handleClick = onClick;
 
   return (
     <button
-      className={`${style.outline} ${
+      className={`${style.outline} ${isClicked ? style.clicked : ""} ${
         answerMode ? (isCorrect ? style.correct : style.wrong) : ""
       }`}
       onClick={handleClick}

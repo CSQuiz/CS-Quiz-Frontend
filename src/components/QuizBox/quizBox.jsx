@@ -12,6 +12,7 @@ const QuizBox = () => {
   const [curQNum, setCurQNum] = useState(0); // 현재 질문 번호
   const [resetTime, setResetTime] = useState(0); // 타이머 리셋용 키
   const [answerMode, setAnswerMode] = useState(false);
+  const [clickedOption, setClickedOption] = useState(""); // 사용자가 선택한 옵션 확인
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -30,6 +31,7 @@ const QuizBox = () => {
       setCurQNum(curQNum + 1); // 다음 문제로 이동
       setAnswerMode(false); // 문제 풀기 모드로 되돌아감
       setResetTime((prev) => prev + 1); // 타이머 리셋
+      setClickedOption(""); // 클릭 상태 초기화
     } else {
       navigate("/score", { replace: true }); // 마지막 문제일 경우 결과 페이지 이동
     }
@@ -38,6 +40,7 @@ const QuizBox = () => {
   const clickOption = (option) => {
     if (!answerMode) {
       setAnswerMode(true); // 사용자가 옵션을 클릭하면 답 출력 모드로 변경
+      setClickedOption(option);
       requestAnswer(option);
     }
   };
@@ -84,6 +87,7 @@ const QuizBox = () => {
               key={index}
               text={option}
               onClick={() => clickOption(option)}
+              isClicked={clickedOption === option}
               isCorrect={option === questions[curQNum]?.answer}
               index={index}
               answerMode={answerMode}

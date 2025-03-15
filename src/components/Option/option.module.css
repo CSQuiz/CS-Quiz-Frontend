@@ -11,6 +11,11 @@
   cursor: pointer;
 }
 
+.clicked {
+  border-style: dashed;
+  border-color: black;
+}
+
 .outline.correct {
   background-color: #00d535;
   color: white;
