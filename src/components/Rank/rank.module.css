@@ -13,3 +13,14 @@
   flex-direction: column;
   gap: 12px;
 }
+
+.routeHome {
+  display: flex;
+  justify-content: center;
+}
+
+.container a {
+  text-decoration: none;
+  color: #b2b2b2;
+  font-size: 14px;
+}
