@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import User from "../User/user";
 import style from "./rank.module.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const SERVER = import.meta.env.VITE_SERVER;
 
@@ -29,6 +30,9 @@ const Rank = () => {
         {rank.map((user, index) => (
           <User key={index} user={user} lank={index} />
         ))}
+      </div>
+      <div className={style.routeHome}>
+        <Link to="/"> 홈으로 이동하기</Link>
       </div>
     </div>
   );
