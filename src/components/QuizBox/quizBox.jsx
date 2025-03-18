@@ -68,7 +68,7 @@ const QuizBox = () => {
     <div className={style.container}>
       <div className={style.timeBar}>
         <ProgressBar
-          duration={15}
+          duration={20}
           onTimeUp={timeUp}
           resetTime={resetTime}
           answerMode={answerMode}
