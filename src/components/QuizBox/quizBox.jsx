@@ -18,7 +18,7 @@ const QuizBox = () => {
   const location = useLocation();
   const gameQuestions = location.state;
 
-  const gameId = localStorage.getItem("gameId");
+  const gameId = sessionStorage.getItem("gameId");
 
   useEffect(() => {
     if (gameQuestions.length > 0) {
@@ -58,7 +58,7 @@ const QuizBox = () => {
         questionId: questions[curQNum]?.id,
         answer: option,
       });
-      console.log("정답 여부: ", response.data);
+      // console.log("정답 여부: ", response.data);
     } catch (e) {
       console.error(e);
     }

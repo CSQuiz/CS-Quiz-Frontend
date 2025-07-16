@@ -2,7 +2,6 @@ import { useState } from "react";
 import style from "./home.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import CustomModal from "../CustomModal/customModal";
 
 const SERVER = import.meta.env.VITE_SERVER;
 
@@ -19,14 +18,13 @@ const Home = ({ setModalOpen, setModalText }) => {
         nickname: nickName,
         difficulty: difficulty,
       });
-      localStorage.setItem("gameId", response.data.gameId);
+      sessionStorage.setItem("gameId", response.data.gameId);
       return response.data.gameQuestionList;
     } catch (e) {
       // 닉네임 중복 처리
       if (e.response.status === 400) {
         setModalOpen(true);
         setModalText("이미 사용중인 닉네임입니다.");
-        // alert("이미 사용중인 닉네임입니다.");
       }
       console.error(e);
       return null;
@@ -43,7 +41,6 @@ const Home = ({ setModalOpen, setModalText }) => {
     } else {
       setModalOpen(true);
       setModalText("닉네임과 난이도를 모두 설정해주세요.");
-      // alert("닉네임과 난이도를 설정해주세요.");
     }
   };
 
@@ -66,6 +63,7 @@ const Home = ({ setModalOpen, setModalText }) => {
             }}
             placeholder="ex) 컴붕이"
             required
+            maxLength={20}
           />
           <div className={style.difficulty}>
             {difficultyList.map((level) => (

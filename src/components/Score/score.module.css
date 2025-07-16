@@ -12,11 +12,11 @@
 }
 
 .content {
-  padding: 2rem 2rem;
+  padding: 2.2rem 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 28px;
+  gap: 32px;
 }
 
 .score {

@@ -7,7 +7,7 @@ const User = ({ user, lank }) => {
         <div className={style.lank}>{lank + 1}</div>
         <div className={style.nickName}>{user.nickname}</div>
       </div>
-      <div className={style.score}>{user.score}점</div>
+      <div className={style.score}>{user.score} 점</div>
     </div>
   );
 };
